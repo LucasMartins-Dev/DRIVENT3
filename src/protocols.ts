@@ -62,3 +62,12 @@ export type PaymentData = {
     cvv: number;
   };
 };
+
+export type HotelById = {
+  id: number;
+  name: string;
+  image: string;
+  createdAt: Date;
+  updatedAt: Date;
+  Rooms: Room[];
+};
