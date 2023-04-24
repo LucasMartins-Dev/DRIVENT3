@@ -7,7 +7,7 @@ import hotelsService from '@/services/hotels-service';
 export async function getHotels(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const { userId } = req;
   try {
-    await hotelsService.checkConditions(userId);
+    await hotelsService.verification(userId);
     const hotels: Hotel[] = await hotelsService.getHotels();
     return res.status(httpStatus.OK).send(hotels);
   } catch (error) {
@@ -18,11 +18,11 @@ export async function getHotels(req: AuthenticatedRequest, res: Response, next: 
   }
 }
 
-export async function getHotelsById(req: AuthenticatedRequest, res: Response, next: NextFunction) {
+export async function getHotelById(req: AuthenticatedRequest, res: Response, next: NextFunction) {
   const { userId } = req;
   const { hotelId } = req.params;
   try {
-    await hotelsService.checkConditions(userId);
+    await hotelsService.verification(userId);
     const hotel: Hotel = await hotelsService.getHotelsById(Number(hotelId));
     res.status(httpStatus.OK).send(hotel);
   } catch (error) {

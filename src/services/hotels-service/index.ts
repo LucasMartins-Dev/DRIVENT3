@@ -4,7 +4,7 @@ import hotelsRepository from '@/repositories/hotels-repository';
 import ticketsRepository from '@/repositories/tickets-repository';
 import { HotelById } from '@/protocols';
 
-async function checkConditions(userId: number): Promise<void> {
+async function verification(userId: number): Promise<void> {
   const enrollmentId = await ticketsRepository.findEnrollmentByUserId(userId);
   if (!enrollmentId) throw notFoundError();
   const ticket = await ticketsRepository.getTicketByIds(0, enrollmentId.id);
@@ -26,7 +26,7 @@ async function getHotelsById(hotelId: number): Promise<HotelById> {
 }
 
 const hotelsService = {
-  checkConditions,
+  verification,
   getHotels,
   getHotelsById,
 };
